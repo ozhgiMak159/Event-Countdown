@@ -157,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				B573ECA228C8B67D00B86115 /* Protocol */,
-				B573EC8128C85D7600B86115 /* AppCoordinator.swift */,
+				B573ECA928C8D5C100B86115 /* MainCoordinator */,
 				B573EC8428C8618A00B86115 /* EventListCoordinator.swift */,
 				B573EC9328C882A600B86115 /* AddEventCoordinator.swift */,
 			);
@@ -252,6 +252,14 @@
 				B573ECA028C89D3900B86115 /* TitleSubtitleCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		B573ECA928C8D5C100B86115 /* MainCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				B573EC8128C85D7600B86115 /* AppCoordinator.swift */,
+			);
+			path = MainCoordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
