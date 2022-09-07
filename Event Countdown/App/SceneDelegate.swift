@@ -6,6 +6,7 @@
 //
 
 import UIKit
+// Этот класс надо удалить!
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         self.window = window
         
+        // при открытия открываем эту сцену.
         self.appCoordinator = AppCoordinator(window: window)
         appCoordinator?.start()
     }

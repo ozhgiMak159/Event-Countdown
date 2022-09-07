@@ -16,8 +16,10 @@ final class EventListCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
+    // Загрузка это сцены вьюКонтроллера - EventListVC
     func start() {
-        let eventListViewController: EventListViewController = .instantiate()
+        // создания объекта
+        let eventListViewController: EventListViewController = .createObject()
         // Иницилизировали свойства 
         let eventListViewModel = EventListViewModel()
         eventListViewModel.coordinator = self
@@ -25,7 +27,8 @@ final class EventListCoordinator: Coordinator {
         navigationController.setViewControllers([eventListViewController], animated: false)
     }
     
-    func startAddEvent() {
+    
+    func startAddNewEvent() {
         let addEventCoordinator = AddEventCoordinator(navigationController: navigationController)
         addEventCoordinator.parentCoordinator = self
         childCoordinators.append(addEventCoordinator)

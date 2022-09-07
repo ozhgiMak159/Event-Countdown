@@ -9,18 +9,18 @@ import UIKit
 
 final class AddEventViewModel {
     
-    var onUpdate: () -> Void = {}
+   // var onUpdate: () -> Void = {}
     var title = "Add"
     
-    var coordinator: AddEventCoordinator?
+    weak var coordinator: AddEventCoordinator?
     private(set) var cells: [Cell] = []
     
-    func viewDidLoad() {
+    func viewDidLoad(completion: @escaping () -> Void) {
         cells = [
             .titleSubtitle(TitleSubtitleCellViewModel(title: "Name", subtitle: "", placeholder: "Add a name")),
             .titleSubtitle(TitleSubtitleCellViewModel(title: "Date", subtitle: "", placeholder: "Select a date"))
         ]
-        onUpdate()
+        completion()
     }
     
     func viewDidDisappear() {

@@ -17,30 +17,34 @@ class EventListViewController: UIViewController {
         setupNavigationBar()
     }
     
+}
+
+
+extension EventListViewController {
+    
+    // Setup Navigation bar
     private func setupNavigationBar() {
         let plusImage = UIImage(systemName: "plus.circle.fill")
         let barButtonItem = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(tappedAddEventButton))
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
         
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 0.9178135348)]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 0.9178135348)]
         
-        navBarAppearance.backgroundColor = UIColor(
-            red: 21/255, green: 101/255, blue: 192/255, alpha: 194/255
-        )
+        navBarAppearance.backgroundColor = #colorLiteral(red: 0.4620226622, green: 0.8382837176, blue: 1, alpha: 1)
         
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         barButtonItem.tintColor = .white
         navigationItem.rightBarButtonItem = barButtonItem
         navigationItem.title = viewModel.title
-        navigationController?.navigationBar.tintColor = .white
+        
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @objc private func tappedAddEventButton() {
         viewModel.tappedAddEvent()
     }
-
+    
 }

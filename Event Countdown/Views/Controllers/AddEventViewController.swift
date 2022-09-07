@@ -17,10 +17,10 @@ class AddEventViewController: UIViewController {
         super.viewDidLoad()
         tableView.register(TitleSubtitleCell.self, forCellReuseIdentifier: "TitleSubtitleCell")
         
-        viewModel.viewDidLoad()
-        viewModel.onUpdate = { [weak self] in
-            self?.tableView.reloadData()
-        }
+        //viewModel.viewDidLoad()
+        updateTableView()
+        
+        
         
         navigationItem.title = viewModel.title
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -36,9 +36,14 @@ class AddEventViewController: UIViewController {
         viewModel.viewDidDisappear()
     }
     
-    
     @objc private func tappedDone() {
         viewModel.tappedDone()
+    }
+    
+    private func updateTableView() {
+        viewModel.viewDidLoad { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
 }
@@ -54,7 +59,7 @@ extension AddEventViewController: UITableViewDataSource {
         switch cellViewModel {
         case .titleSubtitle(let titleSubtitleCellViewModel):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TitleSubtitleCell", for: indexPath) as! TitleSubtitleCell
-            cell.update(with: titleSubtitleCellViewModel)
+            cell.configure(with: titleSubtitleCellViewModel)
             return cell
         case .titleImage:
             return UITableViewCell()

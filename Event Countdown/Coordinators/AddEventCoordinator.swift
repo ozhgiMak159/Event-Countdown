@@ -12,7 +12,7 @@ final class AddEventCoordinator: Coordinator {
     private(set) var childCoordinators: [Coordinator] = []
     private let navigationController: UINavigationController
     
-    var parentCoordinator: EventListCoordinator?
+    weak var parentCoordinator: EventListCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -20,7 +20,7 @@ final class AddEventCoordinator: Coordinator {
     
     func start() {
         let modalNavigationController = UINavigationController()
-        let addEventViewController: AddEventViewController = .instantiate()
+        let addEventViewController: AddEventViewController = .createObject()
         modalNavigationController.setViewControllers([addEventViewController], animated: false)
         let addEventViewModel = AddEventViewModel()
         addEventViewModel.coordinator = self

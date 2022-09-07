@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol Coordinator: AnyObject {
-    var childCoordinators: [Coordinator] { get }
-    func start()
-}
-
 final class AppCoordinator: Coordinator {
     private(set) var childCoordinators: [Coordinator] = []
     private let window: UIWindow
@@ -20,6 +15,7 @@ final class AppCoordinator: Coordinator {
         self.window = window
     }
     
+    // Загрузка стартового экрана - EventListVC
     func start() {
         let navigationController = UINavigationController()
         let eventListCoordinator = EventListCoordinator(navigationController: navigationController)
@@ -29,6 +25,5 @@ final class AppCoordinator: Coordinator {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
-    
     
 }

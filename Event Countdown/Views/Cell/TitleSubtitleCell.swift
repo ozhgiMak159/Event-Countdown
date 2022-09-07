@@ -13,14 +13,26 @@ enum Cell {
 }
 
 final class TitleSubtitleCell: UITableViewCell {
-    private let titleLabel = UILabel()
-    private let subtitleTextField = UITextField()
-    private let verticalStackView = UIStackView()
+ 
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 22, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var subtitleTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = .systemFont(ofSize: 20, weight: .medium)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+        
+    private lazy var verticalStackView = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
-        setupHierarchy()
+        setupViews()
         setupLayout()
     }
     
@@ -28,32 +40,21 @@ final class TitleSubtitleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(with viewModel: TitleSubtitleCellViewModel) {
+    func configure(with viewModel: TitleSubtitleCellViewModel) {
         titleLabel.text = viewModel.title
         subtitleTextField.text = viewModel.subtitle
         subtitleTextField.placeholder = viewModel.placeholder
     }
     
-    private func setupView() {
-        verticalStackView.axis = .vertical
-        titleLabel.font = .systemFont(ofSize: 22, weight: .medium)
-        subtitleTextField.font = .systemFont(ofSize: 20, weight: .medium)
+
+    private func setupViews() {
+        verticalStackView = UIStackView(
+            arrangedSubviews: [titleLabel, subtitleTextField],
+            axis: .vertical,
+            spacing: 10
+        )
         
-        
-        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-//        [verticalStackView, titleLabel, subtitleTextField].forEach { tamik in
-//            tamik.translatesAutoresizingMaskIntoConstraints = false
-//        }
-    }
-    
-    private func setupHierarchy() {
         contentView.addSubview(verticalStackView)
-        verticalStackView.addArrangedSubview(titleLabel)
-        verticalStackView.addArrangedSubview(subtitleTextField)
     }
     
     private func setupLayout() {
