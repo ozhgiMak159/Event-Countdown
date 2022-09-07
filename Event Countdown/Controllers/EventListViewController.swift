@@ -9,12 +9,8 @@ import UIKit
 
 class EventListViewController: UIViewController {
     
-    
-    static func instantiate() -> EventListViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let controller = storyboard.instantiateViewController(withIdentifier: "EventListViewController") as! EventListViewController
-        return controller
-    }
+    // достаем методы и свойсва из - EventListViewModel
+    var viewModel: EventListViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +19,7 @@ class EventListViewController: UIViewController {
     
     private func setupNavigationBar() {
         let plusImage = UIImage(systemName: "plus.circle.fill")
-        let barButtonItem = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(tappedRightBarButton))
+        let barButtonItem = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(tappedAddEventButton))
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
         
@@ -38,13 +34,13 @@ class EventListViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         barButtonItem.tintColor = .white
         navigationItem.rightBarButtonItem = barButtonItem
-        navigationItem.title = "Events"
+        navigationItem.title = viewModel.title
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    @objc private func tappedRightBarButton() {
-        print("1")
+    @objc private func tappedAddEventButton() {
+        viewModel.tappedAddEvent()
     }
 
 }
