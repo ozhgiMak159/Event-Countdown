@@ -9,17 +9,61 @@ import UIKit
 
 class AddEventViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    
     var viewModel: AddEventViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(TitleSubtitleCell.self, forCellReuseIdentifier: "TitleSubtitleCell")
+        
+        viewModel.viewDidLoad()
+        viewModel.onUpdate = { [weak self] in
+            self?.tableView.reloadData()
+        }
+        
+        navigationItem.title = viewModel.title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
+        navigationController?.navigationBar.tintColor = .black
+        // setup TableView
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.setContentOffset(.init(x: 0, y: -1), animated: false)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel.viewDidDisappear()
     }
+    
+    
+    @objc private func tappedDone() {
+        viewModel.tappedDone()
+    }
+    
+}
 
-  
+extension AddEventViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.numberOfRows()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellViewModel = viewModel.cell(for: indexPath)
+        
+        switch cellViewModel {
+        case .titleSubtitle(let titleSubtitleCellViewModel):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TitleSubtitleCell", for: indexPath) as! TitleSubtitleCell
+            cell.update(with: titleSubtitleCellViewModel)
+            return cell
+        case .titleImage:
+            return UITableViewCell()
+        }
+        
+    }
+    
+}
 
+extension AddEventViewController: UITableViewDelegate {
+    
 }
