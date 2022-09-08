@@ -19,16 +19,8 @@ class AddEventViewController: UIViewController {
         
         //viewModel.viewDidLoad()
         updateTableView()
-        
-        
-        
-        navigationItem.title = viewModel.title
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
-        navigationController?.navigationBar.tintColor = .black
-        // setup TableView
-        tableView.contentInsetAdjustmentBehavior = .never
-        tableView.setContentOffset(.init(x: 0, y: -1), animated: false)
+        setupNavigationBar()
+        setupTableView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -46,6 +38,19 @@ class AddEventViewController: UIViewController {
         }
     }
     
+    private func setupNavigationBar() {
+        navigationItem.title = viewModel.title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
+        navigationController?.navigationBar.tintColor = .black
+    }
+    
+    private func setupTableView() {
+        tableView.tableFooterView = UIView()
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.setContentOffset(.init(x: 0, y: -1), animated: false)
+    }
+    
 }
 
 extension AddEventViewController: UITableViewDataSource {
@@ -60,15 +65,20 @@ extension AddEventViewController: UITableViewDataSource {
         case .titleSubtitle(let titleSubtitleCellViewModel):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TitleSubtitleCell", for: indexPath) as! TitleSubtitleCell
             cell.configure(with: titleSubtitleCellViewModel)
+            cell.subtitleTextField.delegate = self
             return cell
-        case .titleImage:
-            return UITableViewCell()
         }
-        
     }
-    
 }
 
-extension AddEventViewController: UITableViewDelegate {
-    
+extension AddEventViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let currentText = textField.text else { return false }
+        let text = currentText + string
+        let point = textField.convert(textField.bounds.origin, to: tableView)
+        if let indexPath = tableView.indexPathForRow(at: point) {
+            viewModel.updateCell(indexPath: indexPath, subtitle: text)
+        }
+        return true
+    }
 }

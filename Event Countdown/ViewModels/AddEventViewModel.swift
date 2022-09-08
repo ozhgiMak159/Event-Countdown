@@ -14,11 +14,39 @@ final class AddEventViewModel {
     
     weak var coordinator: AddEventCoordinator?
     private(set) var cells: [Cell] = []
+   
     
     func viewDidLoad(completion: @escaping () -> Void) {
         cells = [
-            .titleSubtitle(TitleSubtitleCellViewModel(title: "Name", subtitle: "", placeholder: "Add a name")),
-            .titleSubtitle(TitleSubtitleCellViewModel(title: "Date", subtitle: "", placeholder: "Select a date"))
+            .titleSubtitle(TitleSubtitleCellViewModel(
+                title: "Name",
+                subtitle: "",
+                placeholder: "Add a name",
+                type: .text,
+                onCellUpdate: {
+                    completion()
+                })
+            ),
+            
+            .titleSubtitle(TitleSubtitleCellViewModel(
+                    title: "Date",
+                    subtitle: "",
+                    placeholder: "Select a date",
+                    type: .date,
+                    onCellUpdate: {
+                        completion()
+                    })
+            ),
+            
+            .titleSubtitle(TitleSubtitleCellViewModel(
+                    title: "Image",
+                    subtitle: "",
+                    placeholder: "",
+                    type: .image,
+                    onCellUpdate: {
+                        completion()
+                    })
+            )
         ]
         completion()
     }
@@ -37,6 +65,13 @@ final class AddEventViewModel {
     
     func tappedDone() {
         print("1234")
+    }
+    
+    func updateCell(indexPath: IndexPath, subtitle: String) {
+        switch cells[indexPath.row] {
+        case .titleSubtitle(let titleSubtitleCellViewModel):
+            titleSubtitleCellViewModel.update(subtitle)
+        }
     }
     
 }
