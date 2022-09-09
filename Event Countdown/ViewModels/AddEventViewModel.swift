@@ -20,7 +20,46 @@ final class AddEventViewModel {
     private var backgroundImageCellViewModel: TitleSubtitleCellViewModel?
     
     func viewDidLoad(completion: @escaping () -> Void) {
-        
+        setupCells(completion: completion)
+        completion()
+    }
+    
+    func viewDidDisappear() {
+        coordinator?.didFinishAddEvent()
+    }
+    
+    func numberOfRows() -> Int {
+        cells.count
+    }
+    
+    func cell(for indexPath: IndexPath) -> Cell {
+        cells[indexPath.row]
+    }
+    
+    func tappedDone() {
+        print("1234")
+    }
+    
+    func updateCell(indexPath: IndexPath, subtitle: String) {
+        switch cells[indexPath.row] {
+        case .titleSubtitle(let titleSubtitleCellViewModel):
+            titleSubtitleCellViewModel.update(subtitle)
+        }
+    }
+    
+    func didSelectRow(at indexPath: IndexPath) {
+        switch cells[indexPath.row] {
+        case .titleSubtitle(let titleSubtitleCellViewModel):
+            guard titleSubtitleCellViewModel.type == .image else { return }
+            coordinator?.showImagePicker { image in
+                titleSubtitleCellViewModel.update(image)
+            }
+        }
+    }
+}
+
+private extension AddEventViewModel {
+    func setupCells(completion: @escaping () -> Void) {
         nameCellViewModel = TitleSubtitleCellViewModel(
             title: "Name",
             subtitle: "",
@@ -57,39 +96,5 @@ final class AddEventViewModel {
             .titleSubtitle(dateCellViewModel),
             .titleSubtitle(backgroundImageCellViewModel)
         ]
-        completion()
-    }
-    
-    func viewDidDisappear() {
-        coordinator?.didFinishAddEvent()
-    }
-    
-    func numberOfRows() -> Int {
-        cells.count
-    }
-    
-    func cell(for indexPath: IndexPath) -> Cell {
-        cells[indexPath.row]
-    }
-    
-    func tappedDone() {
-        print("1234")
-    }
-    
-    func updateCell(indexPath: IndexPath, subtitle: String) {
-        switch cells[indexPath.row] {
-        case .titleSubtitle(let titleSubtitleCellViewModel):
-            titleSubtitleCellViewModel.update(subtitle)
-        }
-    }
-    
-    func didSelectRow(at indexPath: IndexPath) {
-        switch cells[indexPath.row] {
-        case .titleSubtitle(let titleSubtitleCellViewModel):
-            guard titleSubtitleCellViewModel.type == .image else { return }
-            coordinator?.showImagePicker { image in
-                titleSubtitleCellViewModel.update(image)
-            }
-        }
     }
 }
