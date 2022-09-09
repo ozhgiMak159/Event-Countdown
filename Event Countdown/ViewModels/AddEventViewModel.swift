@@ -79,7 +79,7 @@ final class AddEventViewModel {
         case .titleSubtitle(let titleSubtitleCellViewModel):
             guard titleSubtitleCellViewModel.type == .image else { return }
             coordinator?.showImagePicker { image in
-                
+                titleSubtitleCellViewModel.update(image)
             }
         }
     }

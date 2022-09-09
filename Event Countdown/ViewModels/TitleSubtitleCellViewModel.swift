@@ -5,7 +5,7 @@
 //  Created by Maksim  on 07.09.2022.
 //
 
-import Foundation
+import UIKit
 
 enum CellType {
     case text
@@ -17,6 +17,7 @@ final class TitleSubtitleCellViewModel {
     
     let title: String
     private(set) var subtitle: String
+    private(set) var image: UIImage?
     let placeholder: String
     
     let type: CellType
@@ -47,6 +48,10 @@ final class TitleSubtitleCellViewModel {
         onCellUpdate()
     }
     
+    func update(_ image: UIImage) {
+        self.image = image
+        onCellUpdate()
+    }
     
     
 }

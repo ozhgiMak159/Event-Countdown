@@ -30,6 +30,8 @@ extension ImagePickerCoordinator: UIImagePickerControllerDelegate, UINavigationC
         if let image = info[.originalImage] as? UIImage {
             parentCoordinator?.didFinishPicking(image)
         }
+        
+        parentCoordinator?.childDidFinish(self)
     }
     
     
