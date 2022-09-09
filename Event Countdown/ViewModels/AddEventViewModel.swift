@@ -20,9 +20,17 @@ final class AddEventViewModel {
     private var backgroundImageCellViewModel: TitleSubtitleCellViewModel?
     
     private let cellBuilder: EventsCellBuilder
+    private let coreDataManager: CoreDataManager
     
-    init(cellBuilder: EventsCellBuilder) {
+    lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyy"
+        return dateFormatter
+    }()
+    
+    init(cellBuilder: EventsCellBuilder, coreDataManager: CoreDataManager) {
         self.cellBuilder = cellBuilder
+        self.coreDataManager = coreDataManager
     }
     
     func viewDidLoad() {
@@ -31,7 +39,7 @@ final class AddEventViewModel {
     }
     
     func viewDidDisappear() {
-        coordinator?.didFinishAddEvent()
+        coordinator?.didFinish()
     }
     
     func numberOfRows() -> Int {
@@ -43,7 +51,13 @@ final class AddEventViewModel {
     }
     
     func tappedDone() {
-        print("1234")
+        guard let name = nameCellViewModel?.subtitle,
+              let dateString = dateCellViewModel?.subtitle,
+              let image = backgroundImageCellViewModel?.image,
+              let date = dateFormatter.date(from: dateString) else { return }
+        
+        coreDataManager.saveEvent(name: name, date: date, image: image)
+        coordinator?.didFinishSaveEvent()
     }
     
     func updateCell(indexPath: IndexPath, subtitle: String) {
