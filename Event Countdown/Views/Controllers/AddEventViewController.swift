@@ -17,6 +17,7 @@ class AddEventViewController: UIViewController {
         super.viewDidLoad()
         tableView.register(TitleSubtitleCell.self, forCellReuseIdentifier: "TitleSubtitleCell")
         
+        viewModel.viewDidLoad()
         updateTableView()
         setupNavigationBar()
         setupTableView()
@@ -35,7 +36,6 @@ class AddEventViewController: UIViewController {
         viewModel.onUpdate = { [weak self] in
             self?.tableView.reloadData()
         }
-        viewModel.viewDidLoad()
     }
 }
 

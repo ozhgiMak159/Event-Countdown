@@ -15,13 +15,32 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ejw-7e-a1G">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="6nR-LJ-4bw"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="MGu-8R-PIc"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ejw-7e-a1G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NkO-iL-w1p"/>
+                            <constraint firstItem="Ejw-7e-a1G" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Qng-my-NgO"/>
+                            <constraint firstAttribute="bottom" secondItem="Ejw-7e-a1G" secondAttribute="bottom" id="lKK-hv-1pc"/>
+                            <constraint firstItem="Ejw-7e-a1G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="pO5-ty-lNA"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Ejw-7e-a1G" id="C6v-Q5-VcV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="94"/>
+            <point key="canvasLocation" x="128.98550724637681" y="93.75"/>
         </scene>
         <!--Add Event View Controller-->
         <scene sceneID="SxV-rx-1hT">

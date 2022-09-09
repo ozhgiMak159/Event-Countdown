@@ -9,15 +9,43 @@ import UIKit
 
 class EventListViewController: UIViewController {
     
-    // достаем методы и свойсва из - EventListViewModel
+    @IBOutlet weak var tableView: UITableView!
+    
     var viewModel: EventListViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        tableView.register(EventCell.self, forCellReuseIdentifier: "Cell")
+        viewModel.viewDidLoad()
+        viewModel.onUpdate = { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+}
+
+extension EventListViewController: UITableViewDelegate {}
+
+extension EventListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.numberOfRows()
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch viewModel.cell(at: indexPath) {
+        case .event(let eventCellViewModel):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! EventCell
+            cell.update(with: eventCellViewModel)
+            return cell
+        }
+    }
+    
+    
 }
+
+
+
+
 
 
 extension EventListViewController {

@@ -31,6 +31,9 @@
 		B573ECA828C8D47C00B86115 /* UIStackView + Extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */; };
 		B5E53C8628CB037E0057E209 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */; };
 		B5E53C8928CB10470057E209 /* EventsCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */; };
+		B5E53C8B28CB1F890057E209 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */; };
+		B5E53C8D28CB21260057E209 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8C28CB21260057E209 /* EventCell.swift */; };
+		B5E53C8F28CB25EB0057E209 /* UIView + Extets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8E28CB25EB0057E209 /* UIView + Extets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions .swift"; sourceTree = "<group>"; };
 		B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
 		B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCellBuilder.swift; sourceTree = "<group>"; };
+		B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
+		B5E53C8C28CB21260057E209 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		B5E53C8E28CB25EB0057E209 /* UIView + Extets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extets.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +181,7 @@
 			children = (
 				B573EC9728C8865400B86115 /* UIViewController + Extetsions.swift */,
 				B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */,
+				B5E53C8E28CB25EB0057E209 /* UIView + Extets.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -221,6 +228,7 @@
 				B573EC9028C87EDB00B86115 /* EventListViewModel.swift */,
 				B573EC9B28C887E800B86115 /* AddEventViewModel.swift */,
 				B573EC9D28C89CC200B86115 /* TitleSubtitleCellViewModel.swift */,
+				B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -256,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				B573ECA028C89D3900B86115 /* TitleSubtitleCell.swift */,
+				B5E53C8C28CB21260057E209 /* EventCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -415,9 +424,12 @@
 				B573EC4F28C85CD900B86115 /* AppDelegate.swift in Sources */,
 				B573EC9C28C887E800B86115 /* AddEventViewModel.swift in Sources */,
 				B573EC8228C85D7600B86115 /* AppCoordinator.swift in Sources */,
+				B5E53C8B28CB1F890057E209 /* EventCellViewModel.swift in Sources */,
+				B5E53C8F28CB25EB0057E209 /* UIView + Extets.swift in Sources */,
 				B5E53C8628CB037E0057E209 /* ImagePickerCoordinator.swift in Sources */,
 				B573EC5928C85CD900B86115 /* Event_Countdown.xcdatamodeld in Sources */,
 				B573EC9428C882A600B86115 /* AddEventCoordinator.swift in Sources */,
+				B5E53C8D28CB21260057E209 /* EventCell.swift in Sources */,
 				B573EC8C28C86D3600B86115 /* CoreDataManager.swift in Sources */,
 				B573EC9628C885AF00B86115 /* AddEventViewController.swift in Sources */,
 				B573EC9128C87EDB00B86115 /* EventListViewModel.swift in Sources */,

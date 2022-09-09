@@ -22,33 +22,56 @@ final class CoreDataManager {
         return container
     }()
     
-    private let viewContext: NSManagedObjectContext
-    
-    init() {
-            viewContext = persistentContainer.viewContext
+    private var moc: NSManagedObjectContext {
+            persistentContainer.viewContext
     }
+    
+//    init() {
+//            viewContext = persistentContainer.viewContext
+//    }
     
     // ??
     func saveEvent(name: String, date: Date, image: UIImage) {
-        let event = Event(context: viewContext)
+        let event = Event(context: moc)
         event.setValue(name, forKey: "name")
         let imageData = image.jpegData(compressionQuality: 1)
         event.setValue(imageData, forKey: "image")
         event.setValue(date, forKey: "date")
-        saveContext()
-    }
-    
-    
-    func fetchData(completion: (Result<[Event], Error>) -> Void) {
-        let fetchRequest = Event.fetchRequest()
         
         do {
-            let events = try viewContext.fetch(fetchRequest)
-            completion(.success(events))
+            try moc.save()
         } catch {
-            completion(.failure(error))
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        
+        //saveContext()
+    }
+    
+    func fetchEvent() -> [Event] {
+        do {
+            let fetchRequest = NSFetchRequest<Event>(entityName: "Event")
+            let events = try moc.fetch(fetchRequest)
+            return events
+        } catch {
+           print("error")
+            return []
         }
     }
+    
+    
+    
+    
+//    func fetchData(completion: (Result<[Event], Error>) -> Void) {
+//        let fetchRequest = Event.fetchRequest()
+//
+//        do {
+//            let events = try moc.fetch(fetchRequest)
+//            completion(.success(events))
+//        } catch {
+//            completion(.failure(error))
+//        }
+//    }
     
     
     // Старый метод
@@ -63,16 +86,16 @@ final class CoreDataManager {
 //        }
 //    }
     
-    func saveContext () {
-        if viewContext.hasChanges {
-            do {
-                try viewContext.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
+//    func saveContext () {
+//        if viewContext.hasChanges {
+//            do {
+//                try viewContext.save()
+//            } catch {
+//                let nserror = error as NSError
+//                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+//            }
+//        }
+//    }
 
     
     
