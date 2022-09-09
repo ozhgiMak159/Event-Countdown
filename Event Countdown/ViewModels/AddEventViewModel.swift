@@ -9,7 +9,7 @@ import UIKit
 
 final class AddEventViewModel {
     
-   // var onUpdate: () -> Void = {}
+    var onUpdate: () -> Void = {}
     var title = "Add"
     
     weak var coordinator: AddEventCoordinator?
@@ -25,9 +25,9 @@ final class AddEventViewModel {
         self.cellBuilder = cellBuilder
     }
     
-    func viewDidLoad(completion: @escaping () -> Void) {
-        setupCells(completion: completion)
-        completion()
+    func viewDidLoad() {
+        setupCells()
+        onUpdate()
     }
     
     func viewDidDisappear() {
@@ -65,10 +65,18 @@ final class AddEventViewModel {
 }
 
 private extension AddEventViewModel {
-    func setupCells(completion: @escaping () -> Void) {
-        nameCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.text, completion: completion)
-        dateCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.date, completion: completion)
-        backgroundImageCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.image, completion: completion)
+    func setupCells() {
+        nameCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.text, completion: { [weak self] in
+            self?.onUpdate()
+        })
+        
+        dateCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.date, completion: { [weak self] in
+            self?.onUpdate()
+        })
+        
+        backgroundImageCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.image, completion: { [weak self] in
+            self?.onUpdate()
+        })
         
         guard let nameCellViewModel = nameCellViewModel,
               let dateCellViewModel = dateCellViewModel,
