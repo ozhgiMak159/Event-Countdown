@@ -15,14 +15,15 @@ final class TitleSubtitleCell: UITableViewCell {
  
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .medium)
+        label.font = .systemFont(ofSize: 20, weight: .medium)
+        label.textColor = #colorLiteral(red: 0.5704585314, green: 0.5704723597, blue: 0.5704649091, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private(set) lazy var subtitleTextField: UITextField = {
         let textField = UITextField()
-        textField.font = .systemFont(ofSize: 20, weight: .medium)
+        textField.font = .systemFont(ofSize: 18, weight: .medium)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -34,8 +35,13 @@ final class TitleSubtitleCell: UITableViewCell {
         return datePicker
     }()
     
-    private let photoImageView = UIImageView()
-    
+    private let photoImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "No Photo")
+        image.contentMode = .scaleAspectFit
+        image.layer.cornerRadius = 10
+        return image
+    }()
     
     private lazy var toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 45)) // ????
     private lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapedDone))
@@ -70,8 +76,6 @@ final class TitleSubtitleCell: UITableViewCell {
         
         photoImageView.isHidden = viewModel.type != .image
         subtitleTextField.isHidden = viewModel.type == .image
-        
-       // verticalStackView.spacing = viewModel.type == .image ? 15 : verticalStackView.spacing
     }
     
     
@@ -88,9 +92,6 @@ final class TitleSubtitleCell: UITableViewCell {
         
         contentView.addSubview(verticalStackView)
         toolbar.setItems([doneButton], animated: false)
-       // datePickerView.datePickerMode = .date
-        photoImageView.backgroundColor = .black.withAlphaComponent(0.4)
-        photoImageView.layer.cornerRadius = 10
     }
     
     private func setupLayout() {

@@ -37,20 +37,6 @@ class AddEventViewController: UIViewController {
             self?.tableView.reloadData()
         }
     }
-    
-    private func setupNavigationBar() {
-        navigationItem.title = viewModel.title
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
-        navigationController?.navigationBar.tintColor = .black
-    }
-    
-    private func setupTableView() {
-        tableView.tableFooterView = UIView()
-        tableView.contentInsetAdjustmentBehavior = .never
-        tableView.setContentOffset(.init(x: 0, y: -1), animated: false)
-    }
-    
 }
 
 extension AddEventViewController: UITableViewDataSource {
@@ -66,10 +52,20 @@ extension AddEventViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TitleSubtitleCell", for: indexPath) as! TitleSubtitleCell
             cell.configure(with: titleSubtitleCellViewModel)
             cell.subtitleTextField.delegate = self
+            
             return cell
         }
     }
 }
+
+extension AddEventViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.didSelectRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+}
+
+
 
 extension AddEventViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -80,5 +76,28 @@ extension AddEventViewController: UITextFieldDelegate {
             viewModel.updateCell(indexPath: indexPath, subtitle: text)
         }
         return true
+    }
+}
+
+extension AddEventViewController {
+    
+    private func setupNavigationBar() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+        navBarAppearance.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        
+        navigationItem.title = viewModel.title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+    }
+    
+    private func setupTableView() {
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.setContentOffset(.init(x: 0, y: -1), animated: false)
     }
 }

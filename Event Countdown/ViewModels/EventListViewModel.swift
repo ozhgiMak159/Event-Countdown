@@ -11,7 +11,6 @@ final class EventListViewModel {
     
     let title = "Events"
     
-    // ХЗ - надо ли это
     weak var coordinator: EventListCoordinator?
     
     func tappedAddEvent() {

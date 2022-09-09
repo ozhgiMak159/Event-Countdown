@@ -14,9 +14,11 @@ enum CellType {
 }
 
 final class TitleSubtitleCellViewModel {
+    
     let title: String
     private(set) var subtitle: String
     let placeholder: String
+    
     let type: CellType
     
     lazy var dateFormatter: DateFormatter = {

@@ -10,7 +10,7 @@ import CoreData
 
 final class CoreDataManager {
     
-    static let shared = CoreDataManager()
+   // static let shared = CoreDataManager()
     
     private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Event_Countdown")
@@ -24,8 +24,8 @@ final class CoreDataManager {
     
     private let viewContext: NSManagedObjectContext
     
-    private init() {
-        viewContext = persistentContainer.viewContext
+    init() {
+            viewContext = persistentContainer.viewContext
     }
     
     // ??
