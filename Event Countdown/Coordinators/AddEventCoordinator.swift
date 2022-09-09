@@ -24,7 +24,7 @@ final class AddEventCoordinator: Coordinator {
         self.modalNavigationController = UINavigationController()
         let addEventViewController: AddEventViewController = .createObject()
         modalNavigationController?.setViewControllers([addEventViewController], animated: false)
-        let addEventViewModel = AddEventViewModel()
+        let addEventViewModel = AddEventViewModel(cellBuilder: <#EventsCellBuilder#>)
         addEventViewModel.coordinator = self
         addEventViewController.viewModel = addEventViewModel
         if let modalNavigationController = modalNavigationController {

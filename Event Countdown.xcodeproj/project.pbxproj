@@ -30,6 +30,7 @@
 		B573ECA428C8B79800B86115 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573ECA328C8B79800B86115 /* Coordinator.swift */; };
 		B573ECA828C8D47C00B86115 /* UIStackView + Extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */; };
 		B5E53C8628CB037E0057E209 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */; };
+		B5E53C8928CB10470057E209 /* EventsCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		B573ECA328C8B79800B86115 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions .swift"; sourceTree = "<group>"; };
 		B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
+		B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCellBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		B573EC4D28C85CD900B86115 /* Event Countdown */ = {
 			isa = PBXGroup;
 			children = (
+				B5E53C8728CB101A0057E209 /* Helper */,
 				B573EC8328C85D7E00B86115 /* Coordinators */,
 				B573EC8D28C8727900B86115 /* DataManager */,
 				B573EC9F28C89CFB00B86115 /* Views */,
@@ -263,6 +266,14 @@
 				B573EC8128C85D7600B86115 /* AppCoordinator.swift */,
 			);
 			path = MainCoordinator;
+			sourceTree = "<group>";
+		};
+		B5E53C8728CB101A0057E209 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,6 +423,7 @@
 				B573EC9128C87EDB00B86115 /* EventListViewModel.swift in Sources */,
 				B573ECA128C89D3900B86115 /* TitleSubtitleCell.swift in Sources */,
 				B573EC5128C85CD900B86115 /* SceneDelegate.swift in Sources */,
+				B5E53C8928CB10470057E209 /* EventsCellBuilder.swift in Sources */,
 				B573EC8528C8618A00B86115 /* EventListCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

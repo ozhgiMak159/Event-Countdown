@@ -19,6 +19,12 @@ final class AddEventViewModel {
     private var dateCellViewModel: TitleSubtitleCellViewModel?
     private var backgroundImageCellViewModel: TitleSubtitleCellViewModel?
     
+    private let cellBuilder: EventsCellBuilder
+    
+    init(cellBuilder: EventsCellBuilder) {
+        self.cellBuilder = cellBuilder
+    }
+    
     func viewDidLoad(completion: @escaping () -> Void) {
         setupCells(completion: completion)
         completion()
@@ -60,32 +66,9 @@ final class AddEventViewModel {
 
 private extension AddEventViewModel {
     func setupCells(completion: @escaping () -> Void) {
-        nameCellViewModel = TitleSubtitleCellViewModel(
-            title: "Name",
-            subtitle: "",
-            placeholder: "Add a name",
-            type: .text,
-            onCellUpdate: {
-                completion()
-            })
-        
-        dateCellViewModel = TitleSubtitleCellViewModel(
-            title: "Date",
-            subtitle: "",
-            placeholder: "Select a date",
-            type: .date,
-            onCellUpdate: {
-                completion()
-            })
-        
-        backgroundImageCellViewModel = TitleSubtitleCellViewModel(
-            title: "Image",
-            subtitle: "",
-            placeholder: "",
-            type: .image,
-            onCellUpdate: {
-                completion()
-            })
+        nameCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.text, completion: completion)
+        dateCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.date, completion: completion)
+        backgroundImageCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.image, completion: completion)
         
         guard let nameCellViewModel = nameCellViewModel,
               let dateCellViewModel = dateCellViewModel,
