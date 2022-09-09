@@ -14,39 +14,48 @@ final class AddEventViewModel {
     
     weak var coordinator: AddEventCoordinator?
     private(set) var cells: [Cell] = []
-   
+    
+    private var nameCellViewModel: TitleSubtitleCellViewModel?
+    private var dateCellViewModel: TitleSubtitleCellViewModel?
+    private var backgroundImageCellViewModel: TitleSubtitleCellViewModel?
+    
     func viewDidLoad(completion: @escaping () -> Void) {
         
+        nameCellViewModel = TitleSubtitleCellViewModel(
+            title: "Name",
+            subtitle: "",
+            placeholder: "Add a name",
+            type: .text,
+            onCellUpdate: {
+                completion()
+            })
+        
+        dateCellViewModel = TitleSubtitleCellViewModel(
+            title: "Date",
+            subtitle: "",
+            placeholder: "Select a date",
+            type: .date,
+            onCellUpdate: {
+                completion()
+            })
+        
+        backgroundImageCellViewModel = TitleSubtitleCellViewModel(
+            title: "Image",
+            subtitle: "",
+            placeholder: "",
+            type: .image,
+            onCellUpdate: {
+                completion()
+            })
+        
+        guard let nameCellViewModel = nameCellViewModel,
+              let dateCellViewModel = dateCellViewModel,
+              let backgroundImageCellViewModel = backgroundImageCellViewModel  else { return }
+
         cells = [
-            .titleSubtitle(TitleSubtitleCellViewModel(
-                title: "Name",
-                subtitle: "",
-                placeholder: "Add a name",
-                type: .text,
-                onCellUpdate: {
-                    completion()
-                })
-            ),
-            
-            .titleSubtitle(TitleSubtitleCellViewModel(
-                    title: "Date",
-                    subtitle: "",
-                    placeholder: "Select a date",
-                    type: .date,
-                    onCellUpdate: {
-                        completion()
-                    })
-            ),
-            
-            .titleSubtitle(TitleSubtitleCellViewModel(
-                    title: "Image",
-                    subtitle: "",
-                    placeholder: "",
-                    type: .image,
-                    onCellUpdate: {
-                        completion()
-                    })
-            )
+            .titleSubtitle(nameCellViewModel),
+            .titleSubtitle(dateCellViewModel),
+            .titleSubtitle(backgroundImageCellViewModel)
         ]
         completion()
     }

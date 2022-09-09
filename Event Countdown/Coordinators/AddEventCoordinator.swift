@@ -47,7 +47,8 @@ final class AddEventCoordinator: Coordinator {
     }
     
     func didFinishPicking(_ image: UIImage) {
-       completion(image)
+        completion(image)
+        modalNavigationController?.dismiss(animated: true)
     }
     
     func childDidFinish(_ childCoordinator: Coordinator) {
