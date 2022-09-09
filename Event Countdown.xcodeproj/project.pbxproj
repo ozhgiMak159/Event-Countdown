@@ -34,6 +34,7 @@
 		B5E53C8B28CB1F890057E209 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */; };
 		B5E53C8D28CB21260057E209 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8C28CB21260057E209 /* EventCell.swift */; };
 		B5E53C8F28CB25EB0057E209 /* UIView + Extets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8E28CB25EB0057E209 /* UIView + Extets.swift */; };
+		B5E53C9128CB5C620057E209 /* Date + Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C9028CB5C620057E209 /* Date + Ex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		B5E53C8C28CB21260057E209 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		B5E53C8E28CB25EB0057E209 /* UIView + Extets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extets.swift"; sourceTree = "<group>"; };
+		B5E53C9028CB5C620057E209 /* Date + Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Ex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				B573EC9728C8865400B86115 /* UIViewController + Extetsions.swift */,
 				B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */,
 				B5E53C8E28CB25EB0057E209 /* UIView + Extets.swift */,
+				B5E53C9028CB5C620057E209 /* Date + Ex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				B573EC8728C862CB00B86115 /* EventListViewController.swift in Sources */,
 				B573ECA828C8D47C00B86115 /* UIStackView + Extensions .swift in Sources */,
 				B573EC4F28C85CD900B86115 /* AppDelegate.swift in Sources */,
+				B5E53C9128CB5C620057E209 /* Date + Ex.swift in Sources */,
 				B573EC9C28C887E800B86115 /* AddEventViewModel.swift in Sources */,
 				B573EC8228C85D7600B86115 /* AppCoordinator.swift in Sources */,
 				B5E53C8B28CB1F890057E209 /* EventCellViewModel.swift in Sources */,

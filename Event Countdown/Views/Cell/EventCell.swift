@@ -10,10 +10,7 @@ import UIKit
 
 final class EventCell: UITableViewCell {
     
-    private let yearLabel = UILabel()
-    private let monthLabel = UILabel()
-    private let weekLabel = UILabel()
-    private let daysLabel = UILabel()
+    private let timeRemainingLabels = [UILabel(), UILabel(), UILabel(), UILabel()]
     private let dateLabel = UILabel()
     private let eventNameLabel = UILabel()
     
@@ -33,21 +30,22 @@ final class EventCell: UITableViewCell {
     }
     
     func update(with viewModel: EventCellViewModel) {
-        yearLabel.text = viewModel.yearText
-        monthLabel.text = viewModel.monthText
-        weekLabel.text = viewModel.weekText
-        daysLabel.text = viewModel.dayText
+        viewModel.timeRemainingString.enumerated().forEach { label in
+            timeRemainingLabels[label.offset].text = label.element
+        }
         dateLabel.text = viewModel.dateText
         eventNameLabel.text = viewModel.eventName
-        backgroundImageView.image = viewModel.backgroundImage
+        viewModel.loadImage { image in
+            self.backgroundImageView.image = image
+        }
     }
 
     private func setupView() {
-        [yearLabel, monthLabel, weekLabel, daysLabel, dateLabel, eventNameLabel, backgroundImageView, verticalStackView].forEach { tm in
+        (timeRemainingLabels + [dateLabel, eventNameLabel, backgroundImageView, verticalStackView]).forEach { tm in
             tm.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        [yearLabel, monthLabel, weekLabel, daysLabel].forEach { view in
+        timeRemainingLabels.forEach { view in
             view.font = .systemFont(ofSize: 26, weight: .medium)
             view.textColor = .white
         }
@@ -64,10 +62,10 @@ final class EventCell: UITableViewCell {
         contentView.addSubview(verticalStackView)
         contentView.addSubview(eventNameLabel)
         
-        verticalStackView.addArrangedSubview(yearLabel)
-        verticalStackView.addArrangedSubview(monthLabel)
-        verticalStackView.addArrangedSubview(weekLabel)
-        verticalStackView.addArrangedSubview(daysLabel)
+        timeRemainingLabels.forEach { label in
+            verticalStackView.addArrangedSubview(label)
+        }
+        
         verticalStackView.addArrangedSubview(UIView())
         verticalStackView.addArrangedSubview(dateLabel)
         
