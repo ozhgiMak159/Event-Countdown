@@ -33,6 +33,8 @@
 		B5B914A028CC5241004E3077 /* EventDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9149F28CC5241004E3077 /* EventDetailCoordinator.swift */; };
 		B5B914A228CC53C3004E3077 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B914A128CC53C3004E3077 /* EventDetailViewController.swift */; };
 		B5B914A428CC5AFA004E3077 /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B914A328CC5AFA004E3077 /* EventDetailViewModel.swift */; };
+		B5B914A628CC6879004E3077 /* TimeRemainingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B914A528CC6879004E3077 /* TimeRemainingStackView.swift */; };
+		B5B914A828CC692B004E3077 /* TimeRemainingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B914A728CC692B004E3077 /* TimeRemainingViewModel.swift */; };
 		B5E53C8628CB037E0057E209 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */; };
 		B5E53C8928CB10470057E209 /* EventsCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */; };
 		B5E53C8B28CB1F890057E209 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */; };
@@ -89,6 +91,8 @@
 		B5B9149F28CC5241004E3077 /* EventDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailCoordinator.swift; sourceTree = "<group>"; };
 		B5B914A128CC53C3004E3077 /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		B5B914A328CC5AFA004E3077 /* EventDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModel.swift; sourceTree = "<group>"; };
+		B5B914A528CC6879004E3077 /* TimeRemainingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRemainingStackView.swift; sourceTree = "<group>"; };
+		B5B914A728CC692B004E3077 /* TimeRemainingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRemainingViewModel.swift; sourceTree = "<group>"; };
 		B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
 		B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCellBuilder.swift; sourceTree = "<group>"; };
 		B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 				B573EC9D28C89CC200B86115 /* TitleSubtitleCellViewModel.swift */,
 				B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */,
 				B5B914A328CC5AFA004E3077 /* EventDetailViewModel.swift */,
+				B5B914A728CC692B004E3077 /* TimeRemainingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 				B573EC8F28C87B1800B86115 /* Storyboard */,
 				B573EC9228C8813500B86115 /* Controllers */,
 				B573ECA528C8B90B00B86115 /* Cell */,
+				B5B914A528CC6879004E3077 /* TimeRemainingStackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -435,7 +441,9 @@
 				B5B914A228CC53C3004E3077 /* EventDetailViewController.swift in Sources */,
 				B573EC9E28C89CC200B86115 /* TitleSubtitleCellViewModel.swift in Sources */,
 				B573EC9828C8865400B86115 /* UIViewController + Extetsions.swift in Sources */,
+				B5B914A828CC692B004E3077 /* TimeRemainingViewModel.swift in Sources */,
 				B5B914A428CC5AFA004E3077 /* EventDetailViewModel.swift in Sources */,
+				B5B914A628CC6879004E3077 /* TimeRemainingStackView.swift in Sources */,
 				B573EC8728C862CB00B86115 /* EventListViewController.swift in Sources */,
 				B573ECA828C8D47C00B86115 /* UIStackView + Extensions .swift in Sources */,
 				B573EC4F28C85CD900B86115 /* AppDelegate.swift in Sources */,
