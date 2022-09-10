@@ -76,6 +76,35 @@
             </objects>
             <point key="canvasLocation" x="857" y="94"/>
         </scene>
+        <!--Event Detail View Controller-->
+        <scene sceneID="Bqq-nX-xpx">
+            <objects>
+                <viewController storyboardIdentifier="EventDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cFU-bn-TaE" customClass="EventDetailViewController" customModule="Event_Countdown" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uvi-rN-sXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HXw-AM-g9t">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gsm-AZ-0Dc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HXw-AM-g9t" secondAttribute="trailing" id="3V8-sU-bRN"/>
+                            <constraint firstAttribute="bottom" secondItem="HXw-AM-g9t" secondAttribute="bottom" id="4l3-5U-Zg9"/>
+                            <constraint firstItem="HXw-AM-g9t" firstAttribute="leading" secondItem="uvi-rN-sXZ" secondAttribute="leading" id="VFk-0T-IZZ"/>
+                            <constraint firstItem="HXw-AM-g9t" firstAttribute="top" secondItem="uvi-rN-sXZ" secondAttribute="top" id="f8d-dc-JhA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="HXw-AM-g9t" id="eRf-V1-tGB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c9z-D6-O5a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1638" y="94"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

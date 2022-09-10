@@ -29,6 +29,10 @@
 		B573ECA128C89D3900B86115 /* TitleSubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573ECA028C89D3900B86115 /* TitleSubtitleCell.swift */; };
 		B573ECA428C8B79800B86115 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B573ECA328C8B79800B86115 /* Coordinator.swift */; };
 		B573ECA828C8D47C00B86115 /* UIStackView + Extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */; };
+		B5B9149E28CC4C1C004E3077 /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9149D28CC4C1C004E3077 /* UIImage + Extension.swift */; };
+		B5B914A028CC5241004E3077 /* EventDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9149F28CC5241004E3077 /* EventDetailCoordinator.swift */; };
+		B5B914A228CC53C3004E3077 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B914A128CC53C3004E3077 /* EventDetailViewController.swift */; };
+		B5B914A428CC5AFA004E3077 /* EventDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B914A328CC5AFA004E3077 /* EventDetailViewModel.swift */; };
 		B5E53C8628CB037E0057E209 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */; };
 		B5E53C8928CB10470057E209 /* EventsCellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */; };
 		B5E53C8B28CB1F890057E209 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */; };
@@ -81,6 +85,10 @@
 		B573ECA028C89D3900B86115 /* TitleSubtitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleCell.swift; sourceTree = "<group>"; };
 		B573ECA328C8B79800B86115 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions .swift"; sourceTree = "<group>"; };
+		B5B9149D28CC4C1C004E3077 /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
+		B5B9149F28CC5241004E3077 /* EventDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailCoordinator.swift; sourceTree = "<group>"; };
+		B5B914A128CC53C3004E3077 /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		B5B914A328CC5AFA004E3077 /* EventDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewModel.swift; sourceTree = "<group>"; };
 		B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
 		B5E53C8828CB10470057E209 /* EventsCellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCellBuilder.swift; sourceTree = "<group>"; };
 		B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
@@ -174,6 +182,7 @@
 				B573EC8428C8618A00B86115 /* EventListCoordinator.swift */,
 				B573EC9328C882A600B86115 /* AddEventCoordinator.swift */,
 				B5E53C8528CB037E0057E209 /* ImagePickerCoordinator.swift */,
+				B5B9149F28CC5241004E3077 /* EventDetailCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -185,6 +194,7 @@
 				B573ECA728C8D47C00B86115 /* UIStackView + Extensions .swift */,
 				B5E53C8E28CB25EB0057E209 /* UIView + Extets.swift */,
 				B5E53C9028CB5C620057E209 /* Date + Ex.swift */,
+				B5B9149D28CC4C1C004E3077 /* UIImage + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -221,6 +231,7 @@
 			children = (
 				B573EC8628C862CB00B86115 /* EventListViewController.swift */,
 				B573EC9528C885AF00B86115 /* AddEventViewController.swift */,
+				B5B914A128CC53C3004E3077 /* EventDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -232,6 +243,7 @@
 				B573EC9B28C887E800B86115 /* AddEventViewModel.swift */,
 				B573EC9D28C89CC200B86115 /* TitleSubtitleCellViewModel.swift */,
 				B5E53C8A28CB1F890057E209 /* EventCellViewModel.swift */,
+				B5B914A328CC5AFA004E3077 /* EventDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -420,8 +432,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B573ECA428C8B79800B86115 /* Coordinator.swift in Sources */,
+				B5B914A228CC53C3004E3077 /* EventDetailViewController.swift in Sources */,
 				B573EC9E28C89CC200B86115 /* TitleSubtitleCellViewModel.swift in Sources */,
 				B573EC9828C8865400B86115 /* UIViewController + Extetsions.swift in Sources */,
+				B5B914A428CC5AFA004E3077 /* EventDetailViewModel.swift in Sources */,
 				B573EC8728C862CB00B86115 /* EventListViewController.swift in Sources */,
 				B573ECA828C8D47C00B86115 /* UIStackView + Extensions .swift in Sources */,
 				B573EC4F28C85CD900B86115 /* AppDelegate.swift in Sources */,
@@ -434,6 +448,8 @@
 				B573EC5928C85CD900B86115 /* Event_Countdown.xcdatamodeld in Sources */,
 				B573EC9428C882A600B86115 /* AddEventCoordinator.swift in Sources */,
 				B5E53C8D28CB21260057E209 /* EventCell.swift in Sources */,
+				B5B9149E28CC4C1C004E3077 /* UIImage + Extension.swift in Sources */,
+				B5B914A028CC5241004E3077 /* EventDetailCoordinator.swift in Sources */,
 				B573EC8C28C86D3600B86115 /* CoreDataManager.swift in Sources */,
 				B573EC9628C885AF00B86115 /* AddEventViewController.swift in Sources */,
 				B573EC9128C87EDB00B86115 /* EventListViewModel.swift in Sources */,

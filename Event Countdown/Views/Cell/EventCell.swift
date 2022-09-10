@@ -30,6 +30,10 @@ final class EventCell: UITableViewCell {
     }
     
     func update(with viewModel: EventCellViewModel) {
+        timeRemainingLabels.forEach { label in
+            label.text = ""
+        }
+        
         viewModel.timeRemainingString.enumerated().forEach { label in
             timeRemainingLabels[label.offset].text = label.element
         }

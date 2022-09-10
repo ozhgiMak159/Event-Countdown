@@ -32,7 +32,14 @@ final class EventListViewModel {
     
     func reload() {
         let events = coreDataManager.fetchEvent()
-        cells = events.map { .event(EventCellViewModel($0)) }
+        cells = events.map {
+            var eventCellViewModel = EventCellViewModel($0)
+            if let coordinator = coordinator {
+                eventCellViewModel.onSelect = coordinator.onSelect
+            }
+            return .event(eventCellViewModel)
+            
+        }
         onUpdate()
     }
     
@@ -46,6 +53,13 @@ final class EventListViewModel {
     
     func cell(at indexPath: IndexPath) -> CellEvent {
         return cells[indexPath.row]
+    }
+    
+    func didSelectRow(at indexPath: IndexPath) {
+        switch cells[indexPath.row] {
+        case.event(let eventCellViewModel):
+            eventCellViewModel.didSelect()
+        }
     }
     
     
