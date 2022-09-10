@@ -43,6 +43,11 @@ final class EventDetailViewModel {
         coordinator?.didFinish()
     }
     
+    @objc func editButtonTapped() {
+        guard let event = event else { return }
+      //  coordinator?.onEditEvent(event)
+    }
+    
     deinit {
         print("detail vm deinit ")
     }

@@ -1,17 +1,16 @@
 //
-//  AddEventCoordinator.swift
+//  EditEventCoordinator.swift
 //  Event Countdown
 //
-//  Created by Maksim  on 07.09.2022.
+//  Created by Maksim  on 10.09.2022.
 //
 
-import Foundation
 import UIKit
 
-final class AddEventCoordinator: Coordinator {
+final class EditEventCoordinator: Coordinator {
+    
     private(set) var childCoordinators: [Coordinator] = []
     private let navigationController: UINavigationController
-    private var modalNavigationController: UINavigationController?
     private var completion: (UIImage) -> Void = { _ in }
     
     weak var parentCoordinator: EventListCoordinator?
@@ -21,15 +20,12 @@ final class AddEventCoordinator: Coordinator {
     }
     
     func start() {
-        self.modalNavigationController = UINavigationController()
-        let addEventViewController: AddEventViewController = .createObject()
-        modalNavigationController?.setViewControllers([addEventViewController], animated: false)
-        let addEventViewModel = AddEditEventViewModel(cellBuilder: EventsCellBuilder())
+        let editEventViewController: AddEventViewController = .createObject()
+        let editAddEventViewModel = EditEventViewModel(cellBuilder: EventsCellBuilder())
         addEventViewModel.coordinator = self
         addEventViewController.viewModel = addEventViewModel
-        if let modalNavigationController = modalNavigationController {
-            navigationController.present(modalNavigationController, animated: true)
-        }
+     //   navigationController.present(modalNavigationController, animated: true)
+        
     }
     
     func didFinish() {
@@ -64,5 +60,10 @@ final class AddEventCoordinator: Coordinator {
         }
     }
     
-        
+    
+    
+    
+    
+    
+    
 }

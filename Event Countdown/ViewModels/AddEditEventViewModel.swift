@@ -1,5 +1,5 @@
 //
-//  AddEventViewModel.swift
+//  AddEditEventViewModel.swift
 //  Event Countdown
 //
 //  Created by Maksim  on 07.09.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddEventViewModel {
+final class AddEditEventViewModel {
     
     var onUpdate: () -> Void = {}
     var title = "Add"
@@ -78,7 +78,7 @@ final class AddEventViewModel {
     }
 }
 
-private extension AddEventViewModel {
+private extension AddEditEventViewModel {
     func setupCells() {
         nameCellViewModel = cellBuilder.makeTitleSubtitleCellViewModel(.text, completion: { [weak self] in
             self?.onUpdate()

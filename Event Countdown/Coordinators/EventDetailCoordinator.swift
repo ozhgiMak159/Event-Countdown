@@ -33,6 +33,12 @@ final class EventDetailCoordinator: Coordinator {
         parentCoordinator?.childDidFinish(self)
     }
     
+    func onEditEvent(event: Event) {
+        
+    }
+    
+    
+    
     deinit {
         print("detail coordinator deinit")
     }
