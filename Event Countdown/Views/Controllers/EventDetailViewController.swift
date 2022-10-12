@@ -26,7 +26,7 @@ final class EventDetailViewController: UIViewController {
             self.timeRemainingStackView.update(with: timeRemainingViewModel)
             
         }
-        navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "pencil"), style: .plain, target: viewModel, action: #selector(viewModel.editButtonTapped))
+        navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: viewModel, action: #selector(viewModel.editButtonTapped))
         viewModel.viewDidLoad()
     }
     

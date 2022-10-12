@@ -27,14 +27,11 @@ class EditEventViewController: UIViewController {
         viewModel.viewDidDisappear()
     }
     
-    @objc
-    private func tappedDone() {
+    @objc private func tappedDone() {
         viewModel.tappedDone()
     }
     
     private func setupViews() {
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.register(TitleSubtitleCell.self, forCellReuseIdentifier: "TitleSubtitleCell")
         tableView.tableFooterView = UIView()
         

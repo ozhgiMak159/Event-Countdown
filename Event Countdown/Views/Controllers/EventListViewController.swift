@@ -16,7 +16,6 @@ class EventListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        tableView.register(EventCell.self, forCellReuseIdentifier: "Cell")
         viewModel.viewDidLoad()
         viewModel.onUpdate = { [weak self] in
             self?.tableView.reloadData()
@@ -28,8 +27,6 @@ extension EventListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectRow(at: indexPath)
     }
-    
-    
 }
 
 extension EventListViewController: UITableViewDataSource {
@@ -45,31 +42,21 @@ extension EventListViewController: UITableViewDataSource {
             return cell
         }
     }
-    
-    
+
 }
 
 extension EventListViewController {
     
     // Setup Navigation bar
     private func setupNavigationBar() {
-        let plusImage = UIImage(systemName: "plus.circle.fill")
+        let plusImage = UIImage(systemName: "plus.square.fill.on.square.fill")
         let barButtonItem = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(tappedAddEventButton))
-//        let navBarAppearance = UINavigationBarAppearance()
-//        navBarAppearance.configureWithOpaqueBackground()
-//
-//        navBarAppearance.titleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
-//        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
-//
-//        navBarAppearance.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-//
-//        navigationController?.navigationBar.standardAppearance = navBarAppearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        barButtonItem.tintColor = .white
+        barButtonItem.tintColor = .primary
         navigationItem.rightBarButtonItem = barButtonItem
         navigationItem.title = viewModel.title
-        
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        tableView.register(EventCell.self, forCellReuseIdentifier: "Cell")
     }
     
     @objc private func tappedAddEventButton() {

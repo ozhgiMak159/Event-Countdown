@@ -111,6 +111,40 @@
             </objects>
             <point key="canvasLocation" x="1638" y="94"/>
         </scene>
+        <!--Edit Event View Controller-->
+        <scene sceneID="he1-kY-bvs">
+            <objects>
+                <viewController storyboardIdentifier="EditEventViewController" id="Wsg-Ub-D2q" customClass="EditEventViewController" customModule="Event_Countdown" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Skh-jl-3co">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GSg-TS-iLU">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Wsg-Ub-D2q" id="i98-kq-pvu"/>
+                                    <outlet property="delegate" destination="Wsg-Ub-D2q" id="ILh-Rp-K12"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4aa-bj-L0Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4aa-bj-L0Y" firstAttribute="bottom" secondItem="GSg-TS-iLU" secondAttribute="bottom" id="OoS-uC-zVc"/>
+                            <constraint firstItem="GSg-TS-iLU" firstAttribute="trailing" secondItem="4aa-bj-L0Y" secondAttribute="trailing" id="QdB-bV-2sJ"/>
+                            <constraint firstItem="GSg-TS-iLU" firstAttribute="top" secondItem="4aa-bj-L0Y" secondAttribute="top" id="fmQ-6z-SXt"/>
+                            <constraint firstItem="GSg-TS-iLU" firstAttribute="leading" secondItem="4aa-bj-L0Y" secondAttribute="leading" id="mcz-Vy-P8D"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="GSg-TS-iLU" id="ieh-IQ-AlI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ejf-q4-UwT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2446.376811594203" y="93.75"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
