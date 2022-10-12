@@ -8,6 +8,7 @@
 import UIKit
  
 final class TimeRemainingViewModel {
+    
     enum Mode {
         case cell
         case detail
@@ -38,9 +39,5 @@ final class TimeRemainingViewModel {
         self.timeRemainingParts = timeRemainingParts
         self.mode = mode
     }
-    
-    
-    
-    
-    
 }
+

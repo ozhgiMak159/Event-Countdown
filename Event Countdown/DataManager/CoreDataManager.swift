@@ -22,90 +22,35 @@ final class CoreDataManager {
         return container
     }()
     
-    private var moc: NSManagedObjectContext {
+     var moc: NSManagedObjectContext {
             persistentContainer.viewContext
     }
     
-//    init() {
-//            viewContext = persistentContainer.viewContext
-//    }
-    
-    // ??
-    func saveEvent(name: String, date: Date, image: UIImage) {
-        let event = Event(context: moc)
-        event.setValue(name, forKey: "name")
-        let resizedImage = image.sameAspectRatio(newHeight: 250)
-        let imageData = resizedImage.jpegData(compressionQuality: 0.5)
-        event.setValue(imageData, forKey: "image")
-        event.setValue(date, forKey: "date")
-        
+    func get<T: NSManagedObject>(_ id: NSManagedObjectID) -> T? {
         do {
-            try moc.save()
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        
-        //saveContext()
-    }
-    
-    func fetchEvent() -> [Event] {
-        do {
-            let fetchRequest = NSFetchRequest<Event>(entityName: "Event")
-            let events = try moc.fetch(fetchRequest)
-            return events
-        } catch {
-           print("error")
-            return []
-        }
-    }
-    
-    func getEvent(_ id: NSManagedObjectID) -> Event? {
-        do {
-            return try moc.existingObject(with: id) as? Event
+            return try moc.existingObject(with: id) as? T
         } catch {
             print(error)
         }
         return nil
     }
     
+    func getAll<T: NSManagedObject>() -> [T] {
+        do {
+            let fetchRequest = NSFetchRequest<T>(entityName: "\(T.self)")
+            return try moc.fetch(fetchRequest)
+        } catch {
+            print(error)
+            return []
+        }
+    }
     
-    
-//    func fetchData(completion: (Result<[Event], Error>) -> Void) {
-//        let fetchRequest = Event.fetchRequest()
-//
-//        do {
-//            let events = try moc.fetch(fetchRequest)
-//            completion(.success(events))
-//        } catch {
-//            completion(.failure(error))
-//        }
-//    }
-    
-    
-    // Старый метод
-//    func fetchEvents() -> [Event] {
-//        do {
-//            let fetchRequest = NSFetchRequest<Event>(entityName: "Event")
-//            let events = try viewContext.fetch(fetchRequest)
-//            return events
-//        } catch {
-//            print(error)
-//            return []
-//        }
-//    }
-    
-//    func saveContext () {
-//        if viewContext.hasChanges {
-//            do {
-//                try viewContext.save()
-//            } catch {
-//                let nserror = error as NSError
-//                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//            }
-//        }
-//    }
-
-    
-    
+    func save() {
+        do {
+            try moc.save()
+        } catch {
+            print(error)
+        }
+    }
 }
+

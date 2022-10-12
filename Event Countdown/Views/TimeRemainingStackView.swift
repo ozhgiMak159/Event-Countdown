@@ -11,29 +11,24 @@ final class TimeRemainingStackView: UIStackView {
     private let timeRemainingLabels = [UILabel(), UILabel(), UILabel(), UILabel()]
     
     func setup() {
-        timeRemainingLabels.forEach { label in
-            addArrangedSubview(label)
+        timeRemainingLabels.forEach {
+            addArrangedSubview($0)
         }
         axis = .vertical
         translatesAutoresizingMaskIntoConstraints = false
     }
     
     func update(with viewModel: TimeRemainingViewModel) {
-        timeRemainingLabels.forEach { element in
-            element.text = ""
-            element.font = .systemFont(ofSize: viewModel.fontSize, weight: .medium)
-            element.textColor = .white
+        timeRemainingLabels.forEach {
+            $0.text = ""
+            $0.font = .systemFont(ofSize: viewModel.fontSize, weight: .medium)
+            $0.textColor = .white
         }
         
-        viewModel.timeRemainingParts.enumerated().forEach { label in
-            timeRemainingLabels[label.offset].text = label.element
+        viewModel.timeRemainingParts.enumerated().forEach {
+            timeRemainingLabels[$0.offset].text = $0.element
         }
         
         alignment = viewModel.alignment
-        
     }
-    
-    
-    
-    
 }

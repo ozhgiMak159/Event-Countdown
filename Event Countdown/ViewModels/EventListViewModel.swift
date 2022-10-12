@@ -7,23 +7,21 @@
 
 import Foundation
 
-enum CellEvent {
-    case event(EventCellViewModel)
-}
-
 final class EventListViewModel {
     
-    weak var coordinator: EventListCoordinator?
     let title = "Events"
+    var coordinator: EventListCoordinator?
     var onUpdate = {}
     
+    enum Cell {
+        case event(EventCellViewModel)
+    }
     
+    private(set) var cells: [Cell] = []
+    private let eventService: EventServiceProtocol
     
-    private(set) var cells: [CellEvent] = []
-    private let coreDataManager: CoreDataManager
-    
-    init(coreDataManager: CoreDataManager = CoreDataManager.shared) {
-        self.coreDataManager = coreDataManager
+    init(eventService: EventServiceProtocol = EventService()) {
+        self.eventService = eventService
     }
     
     func viewDidLoad() {
@@ -31,36 +29,34 @@ final class EventListViewModel {
     }
     
     func reload() {
-        let events = coreDataManager.fetchEvent()
+        EventCellViewModel.imageCache.removeAllObjects()
+        let events = eventService.getEvents()
         cells = events.map {
             var eventCellViewModel = EventCellViewModel($0)
             if let coordinator = coordinator {
                 eventCellViewModel.onSelect = coordinator.onSelect
             }
             return .event(eventCellViewModel)
-            
         }
         onUpdate()
     }
     
     func tappedAddEvent() {
-        coordinator?.startAddNewEvent()
+        coordinator?.startAddEvent()
     }
     
     func numberOfRows() -> Int {
-        cells.count
+        return cells.count
     }
     
-    func cell(at indexPath: IndexPath) -> CellEvent {
+    func cell(at indexPath: IndexPath) -> Cell {
         return cells[indexPath.row]
     }
     
     func didSelectRow(at indexPath: IndexPath) {
         switch cells[indexPath.row] {
-        case.event(let eventCellViewModel):
+        case .event(let eventCellViewModel):
             eventCellViewModel.didSelect()
         }
     }
-    
-    
 }

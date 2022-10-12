@@ -11,7 +11,7 @@ class AddEventViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: AddEditEventViewModel!
+    var viewModel: AddEventViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ extension AddEventViewController: UITableViewDataSource {
         switch cellViewModel {
         case .titleSubtitle(let titleSubtitleCellViewModel):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TitleSubtitleCell", for: indexPath) as! TitleSubtitleCell
-            cell.configure(with: titleSubtitleCellViewModel)
+            cell.update(with: titleSubtitleCellViewModel)
             cell.subtitleTextField.delegate = self
             
             return cell

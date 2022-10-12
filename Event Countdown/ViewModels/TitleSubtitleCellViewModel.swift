@@ -7,30 +7,27 @@
 
 import UIKit
 
-enum CellType {
-    case text
-    case date
-    case image
-}
-
 final class TitleSubtitleCellViewModel {
+    
+    enum CellType {
+        case text
+        case date
+        case image
+    }
     
     let title: String
     private(set) var subtitle: String
-    private(set) var image: UIImage?
     let placeholder: String
-    
     let type: CellType
-    
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyy"
+        dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter
     }()
-    
+    private(set) var image: UIImage?
     private(set) var onCellUpdate: (() -> Void)?
     
-    init(title: String, subtitle: String, placeholder: String, type: CellType, onCellUpdate:  (() -> Void)?) {
+    init(title: String, subtitle: String, placeholder: String, type: CellType, onCellUpdate: (() -> Void)?) {
         self.title = title
         self.subtitle = subtitle
         self.placeholder = placeholder
@@ -44,7 +41,7 @@ final class TitleSubtitleCellViewModel {
     
     func update(_ date: Date) {
         let dateString = dateFormatter.string(from: date)
-        self.subtitle = dateString
+        subtitle = dateString
         onCellUpdate?()
     }
     
@@ -52,6 +49,4 @@ final class TitleSubtitleCellViewModel {
         self.image = image
         onCellUpdate?()
     }
-    
-    
 }

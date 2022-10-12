@@ -11,7 +11,7 @@ import CoreData
 struct EventCellViewModel {
     
     let date = Date()
-    private static let imageCache = NSCache<NSString, UIImage>()
+    static let imageCache = NSCache<NSString, UIImage>()
     private let imageQueue = DispatchQueue(label: "imageQueue", qos: .background)
     var onSelect: (NSManagedObjectID) -> Void = { _ in }
     
@@ -19,7 +19,7 @@ struct EventCellViewModel {
         event.objectID.description
     }
     
-    var timeRemainingString: [String] {
+    var timeRemainingStrings: [String] {
         guard let eventDate = event.date else { return [] }
         return date.timeRemaining(until: eventDate)?.components(separatedBy: ",") ?? []
     }
@@ -38,7 +38,6 @@ struct EventCellViewModel {
     var timeRemainingViewModel: TimeRemainingViewModel? {
         guard let eventDate = event.date,
               let timeRemainingParts = date.timeRemaining(until: eventDate)?.components(separatedBy: ",") else { return nil }
-        
         return TimeRemainingViewModel(timeRemainingParts: timeRemainingParts, mode: .cell)
     }
     
@@ -47,16 +46,15 @@ struct EventCellViewModel {
             completion(image)
         } else {
             imageQueue.async {
-                guard let imageData = self.event.image, let image = UIImage(data: imageData) else {
+                guard let imageData = event.image, let image = UIImage(data: imageData) else {
                     completion(nil)
                     return
                 }
-                Self.imageCache.setObject(image, forKey: self.cacheKey as NSString)
+                Self.imageCache.setObject(image, forKey: cacheKey as NSString)
                 DispatchQueue.main.async {
                     completion(image)
                 }
             }
-            
         }
     }
     
@@ -64,20 +62,9 @@ struct EventCellViewModel {
         onSelect(event.objectID)
     }
     
-    
-    
-//    var backgroundImage: UIImage? {
-//        guard let imageData = event.image else { return UIImage() }
-//        return UIImage(data: imageData) ?? UIImage()
-//    }
-    
     private let event: Event
     
     init(_ event: Event) {
         self.event = event
     }
-    
-    
-    
-    
 }

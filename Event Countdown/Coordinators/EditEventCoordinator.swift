@@ -7,49 +7,51 @@
 
 import UIKit
 
+protocol EventUpdatingCoordinator: Coordinator {
+    var onUpdateEvent: () -> Void { get }
+}
+
 final class EditEventCoordinator: Coordinator {
     
     private(set) var childCoordinators: [Coordinator] = []
     private let navigationController: UINavigationController
+    private let event: Event
     private var completion: (UIImage) -> Void = { _ in }
     
-    weak var parentCoordinator: EventListCoordinator?
+    var parentCoordinator: EventUpdatingCoordinator?
     
-    init(navigationController: UINavigationController) {
+    init(event: Event, navigationController: UINavigationController) {
+        self.event = event
         self.navigationController = navigationController
     }
     
     func start() {
-        let editEventViewController: AddEventViewController = .createObject()
-        let editAddEventViewModel = EditEventViewModel(cellBuilder: EventsCellBuilder())
-        addEventViewModel.coordinator = self
-        addEventViewController.viewModel = addEventViewModel
-     //   navigationController.present(modalNavigationController, animated: true)
-        
+        let editEventViewController: EditEventViewController = .instantiate()
+        let editEventViewModel = EditEventViewModel(event: event, cellBuilder: EventsCellBuilder())
+        editEventViewModel.coordinator = self
+        editEventViewController.viewModel = editEventViewModel
+        navigationController.pushViewController(editEventViewController, animated: true)
     }
     
     func didFinish() {
         parentCoordinator?.childDidFinish(self)
     }
     
-    func didFinishSaveEvent() {
-        parentCoordinator?.onSaveEvent()
-        navigationController.dismiss(animated: true)
+    func didFinishUpdateEvent() {
+        parentCoordinator?.onUpdateEvent()
+        navigationController.popViewController(animated: true)
     }
     
-    func showImagePicker(completion: @escaping(UIImage) -> Void) {
-        guard let modalNavigationController = modalNavigationController else { return }
+    func showImagePicker(completion: @escaping (UIImage) -> Void) {
         self.completion = completion
-        let imagePickerCoordinator = ImagePickerCoordinator(navigationController: modalNavigationController)
+        let imagePickerCoordinator = ImagePickerCoordinator(navigationController: navigationController)
         imagePickerCoordinator.parentCoordinator = self
+        imagePickerCoordinator.onFinishPicking = { [weak self] image in
+            completion(image)
+            self?.navigationController.dismiss(animated: true, completion: nil)
+        }
         childCoordinators.append(imagePickerCoordinator)
         imagePickerCoordinator.start()
-
-    }
-    
-    func didFinishPicking(_ image: UIImage) {
-        completion(image)
-        modalNavigationController?.dismiss(animated: true)
     }
     
     func childDidFinish(_ childCoordinator: Coordinator) {
@@ -59,11 +61,4 @@ final class EditEventCoordinator: Coordinator {
             childCoordinators.remove(at: index)
         }
     }
-    
-    
-    
-    
-    
-    
-    
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIImage {
+    
     func sameAspectRatio(newHeight: CGFloat) -> UIImage {
         let scale = newHeight / size.height
         let newWidth = size.width * scale

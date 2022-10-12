@@ -8,9 +8,9 @@
 import UIKit
 import CoreData
 
-final class EventListCoordinator: Coordinator {
+final class EventListCoordinator: EventUpdatingCoordinator {
     private(set) var childCoordinators: [Coordinator] = []
-    var onSaveEvent = {}
+    var onUpdateEvent = { }
     
     private let navigationController: UINavigationController
     
@@ -18,19 +18,16 @@ final class EventListCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    // Загрузка это сцены вьюКонтроллера - EventListVC
     func start() {
-        // создания объекта
-        let eventListViewController: EventListViewController = .createObject()
-        // Иницилизировали свойства 
+        let eventListViewController: EventListViewController = .instantiate()
         let eventListViewModel = EventListViewModel()
         eventListViewModel.coordinator = self
-        onSaveEvent = eventListViewModel.reload
+        onUpdateEvent = eventListViewModel.reload
         eventListViewController.viewModel = eventListViewModel
         navigationController.setViewControllers([eventListViewController], animated: false)
     }
     
-    func startAddNewEvent() {
+    func startAddEvent() {
         let addEventCoordinator = AddEventCoordinator(navigationController: navigationController)
         addEventCoordinator.parentCoordinator = self
         childCoordinators.append(addEventCoordinator)
@@ -38,12 +35,11 @@ final class EventListCoordinator: Coordinator {
     }
     
     func onSelect(_ id: NSManagedObjectID) {
-        let eventDetailCoordinator = EventDetailCoordinator(navigationController: navigationController, eventID: id)
+        let eventDetailCoordinator = EventDetailCoordinator(eventId: id, navigationController: navigationController)
         eventDetailCoordinator.parentCoordinator = self
         childCoordinators.append(eventDetailCoordinator)
         eventDetailCoordinator.start()
     }
-    
     
     func childDidFinish(_ childCoordinator: Coordinator) {
         if let index = childCoordinators.firstIndex(where: { coordinator -> Bool in
@@ -52,5 +48,5 @@ final class EventListCoordinator: Coordinator {
             childCoordinators.remove(at: index)
         }
     }
-    
 }
+

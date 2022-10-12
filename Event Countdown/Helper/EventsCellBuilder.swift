@@ -9,7 +9,8 @@ import Foundation
 
 struct EventsCellBuilder {
     
-    func makeTitleSubtitleCellViewModel(_ type: CellType, completion:  (() -> Void)? = nil)  -> TitleSubtitleCellViewModel {
+    func makeTitleSubtitleCellViewModel(_ type: TitleSubtitleCellViewModel.CellType,
+                                        onCellUpdate: (() -> Void)? = nil) -> TitleSubtitleCellViewModel {
         switch type {
         case .text:
             return TitleSubtitleCellViewModel(
@@ -17,7 +18,7 @@ struct EventsCellBuilder {
                 subtitle: "",
                 placeholder: "Add a name",
                 type: .text,
-                onCellUpdate: completion
+                onCellUpdate: onCellUpdate
             )
             
         case .date:
@@ -26,19 +27,17 @@ struct EventsCellBuilder {
                 subtitle: "",
                 placeholder: "Select a date",
                 type: .date,
-                onCellUpdate: completion
+                onCellUpdate: onCellUpdate
             )
             
         case .image:
             return TitleSubtitleCellViewModel(
-                title: "Image",
+                title: "Background",
                 subtitle: "",
                 placeholder: "",
                 type: .image,
-                onCellUpdate: completion
+                onCellUpdate: onCellUpdate
             )
         }
     }
-    
-    
 }

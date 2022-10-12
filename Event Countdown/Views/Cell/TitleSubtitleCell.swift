@@ -7,52 +7,26 @@
 
 import UIKit
 
-enum Cell {
-    case titleSubtitle(TitleSubtitleCellViewModel)
-}
-
 final class TitleSubtitleCell: UITableViewCell {
- 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .medium)
-        label.textColor = #colorLiteral(red: 0.5704585314, green: 0.5704723597, blue: 0.5704649091, alpha: 1)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let titleLabel = UILabel()
+    let subtitleTextField = UITextField()
+    private let verticalStackView = UIStackView()
+    private let constant: CGFloat = 15
+    
+    private let datePickerView = UIDatePicker()
+    private let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 100))
+    lazy var doneButton: UIBarButtonItem = {
+        UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDone))
     }()
     
-    private(set) lazy var subtitleTextField: UITextField = {
-        let textField = UITextField()
-        textField.font = .systemFont(ofSize: 18, weight: .medium)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
-    private lazy var datePickerView: UIDatePicker = {
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
-        return datePicker
-    }()
-    
-    private let photoImageView: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "No Photo")
-        image.contentMode = .scaleAspectFit
-        image.layer.cornerRadius = 10
-        return image
-    }()
-    
-    private lazy var toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 45)) // ????
-    private lazy var doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapedDone))
-    
-    private lazy var verticalStackView = UIStackView()
+    private let photoImageView = UIImageView()
     
     private var viewModel: TitleSubtitleCellViewModel?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
+        setupHierarchy()
         setupLayout()
     }
     
@@ -60,54 +34,63 @@ final class TitleSubtitleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with viewModel: TitleSubtitleCellViewModel) {
+    func update(with viewModel: TitleSubtitleCellViewModel) {
         self.viewModel = viewModel
         titleLabel.text = viewModel.title
         subtitleTextField.text = viewModel.subtitle
         subtitleTextField.placeholder = viewModel.placeholder
         
-        subtitleTextField.inputView = viewModel.type == .text
-            ? nil
-            : datePickerView
-        
-        subtitleTextField.inputAccessoryView = viewModel.type == .text
-            ? nil
-            : toolbar
+        subtitleTextField.inputView = viewModel.type == .text ? nil : datePickerView
+        subtitleTextField.inputAccessoryView = viewModel.type == .text ? nil : toolbar
         
         photoImageView.isHidden = viewModel.type != .image
         subtitleTextField.isHidden = viewModel.type == .image
         
-        //????
         photoImageView.image = viewModel.image
-    }
-    
-    
-    @objc private func tapedDone() {
-        viewModel?.update(datePickerView.date)
+        
+        verticalStackView.spacing = viewModel.type == .image ? 15 : verticalStackView.spacing
     }
     
     private func setupViews() {
-        verticalStackView = UIStackView(
-            arrangedSubviews: [titleLabel, subtitleTextField, photoImageView],
-            axis: .vertical,
-            spacing: 10
-        )
+        verticalStackView.axis = .vertical
+        titleLabel.font = .systemFont(ofSize: 22, weight: .medium)
+        subtitleTextField.font = .systemFont(ofSize: 20, weight: .medium)
         
-        contentView.addSubview(verticalStackView)
+        [verticalStackView, titleLabel, subtitleTextField].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
         toolbar.setItems([doneButton], animated: false)
+        datePickerView.preferredDatePickerStyle = .wheels
+        datePickerView.datePickerMode = .date
+        photoImageView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        photoImageView.layer.cornerRadius = 10
+    }
+    
+    private func setupHierarchy() {
+        contentView.addSubview(verticalStackView)
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addArrangedSubview(subtitleTextField)
+        verticalStackView.addArrangedSubview(photoImageView)
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            verticalStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15),
-            verticalStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15),
-            verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15)
+            verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                                   constant: constant),
+            verticalStackView.leftAnchor.constraint(equalTo: contentView.leftAnchor,
+                                                    constant: constant),
+            verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
+                                                      constant: -constant),
+            verticalStackView.rightAnchor.constraint(equalTo: contentView.rightAnchor,
+                                                     constant: -constant)
         ])
         
         photoImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        
     }
     
-    
+    @objc
+    private func tappedDone() {
+        viewModel?.update(datePickerView.date)
+    }
 }

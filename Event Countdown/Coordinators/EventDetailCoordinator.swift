@@ -8,25 +8,29 @@
 import CoreData
 import UIKit
 
-final class EventDetailCoordinator: Coordinator {
+final class EventDetailCoordinator: EventUpdatingCoordinator {
     
-    var childCoordinators: [Coordinator] = []
+    private(set) var childCoordinators: [Coordinator] = []
     private let navigationController: UINavigationController
-    private let eventID: NSManagedObjectID
+    private let eventId: NSManagedObjectID
     var parentCoordinator: EventListCoordinator?
+    var onUpdateEvent = { }
     
-    init(navigationController: UINavigationController, eventID: NSManagedObjectID) {
+    init(eventId: NSManagedObjectID, navigationController: UINavigationController) {
+        self.eventId = eventId
         self.navigationController = navigationController
-        self.eventID = eventID
     }
     
     func start() {
-        let detailViewController: EventDetailViewController = .createObject()
-        let eventDetailViewModel = EventDetailViewModel(eventID: eventID)
+        let eventDetailViewController: EventDetailViewController = .instantiate()
+        let eventDetailViewModel = EventDetailViewModel(eventId: eventId)
         eventDetailViewModel.coordinator = self
-        detailViewController.viewModel = eventDetailViewModel
-        
-        navigationController.pushViewController(detailViewController, animated: true)
+        onUpdateEvent = {
+            eventDetailViewModel.reload()
+            self.parentCoordinator?.onUpdateEvent()
+        }
+        eventDetailViewController.viewModel = eventDetailViewModel
+        navigationController.pushViewController(eventDetailViewController, animated: true)
     }
     
     func didFinish() {
@@ -34,13 +38,19 @@ final class EventDetailCoordinator: Coordinator {
     }
     
     func onEditEvent(event: Event) {
-        
+        let editEventCoordinator = EditEventCoordinator(event: event,
+                                                        navigationController: navigationController)
+        editEventCoordinator.parentCoordinator = self
+        childCoordinators.append(editEventCoordinator)
+        editEventCoordinator.start()
     }
     
-    
-    
-    deinit {
-        print("detail coordinator deinit")
+    func childDidFinish(_ childCoordinator: Coordinator) {
+        if let index = childCoordinators.firstIndex(where: { coordinator -> Bool in
+            return childCoordinator === coordinator
+        }) {
+            childCoordinators.remove(at: index)
+        }
     }
-    
 }
+

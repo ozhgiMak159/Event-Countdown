@@ -10,12 +10,12 @@ import UIKit
 
 final class EventDetailViewModel {
     
-    private let eventID: NSManagedObjectID
-    private let coreDataManager: CoreDataManager
-    var coordinator: EventDetailCoordinator?
+    private let eventId: NSManagedObjectID
+    private let eventService: EventServiceProtocol
     private var event: Event?
     private let date = Date()
     var onUpdate = {}
+    var coordinator: EventDetailCoordinator?
     
     var image: UIImage? {
         guard let imageData = event?.image else { return nil }
@@ -25,31 +25,30 @@ final class EventDetailViewModel {
     var timeRemainingViewModel: TimeRemainingViewModel? {
         guard let eventDate = event?.date,
               let timeRemainingParts = date.timeRemaining(until: eventDate)?.components(separatedBy: ",") else { return nil }
-        
         return TimeRemainingViewModel(timeRemainingParts: timeRemainingParts, mode: .detail)
     }
     
-    init(eventID: NSManagedObjectID, coreDataManager: CoreDataManager = .shared) {
-        self.eventID = eventID
-        self.coreDataManager = coreDataManager
+    init(eventId: NSManagedObjectID, eventService: EventServiceProtocol = EventService()) {
+        self.eventId = eventId
+        self.eventService = eventService
     }
     
     func viewDidLoad() {
-        event = coreDataManager.getEvent(eventID)
-        onUpdate()
+        reload()
     }
     
     func viewDidDisappear() {
         coordinator?.didFinish()
     }
     
-    @objc func editButtonTapped() {
+    func reload() {
+        event = eventService.getEvent(eventId)
+        onUpdate()
+    }
+    
+    @objc
+    func editButtonTapped() {
         guard let event = event else { return }
-      //  coordinator?.onEditEvent(event)
+        coordinator?.onEditEvent(event: event)
     }
-    
-    deinit {
-        print("detail vm deinit ")
-    }
-    
 }
